@@ -19,6 +19,7 @@ function DayColumn({ date, list, invMap, onNew, onEdit, now, showNow }) {
         ) : (
           <button
             key={`f${h}`}
+            data-coach="slot"
             onClick={() => onNew(date, h)}
             style={{ gridRow: `${h - 8} / span 1` }}
             className="m-0.5 flex items-center justify-center gap-1 rounded-2xl border border-dashed border-line text-[13px] text-faint hover:border-go hover:text-go active:bg-go-soft"
@@ -100,7 +101,7 @@ export default function WeekView({ anchor, setAnchor, reservations, invMap, onNe
 
       {/* 폰: 요일 고르기 + 하루 시간표 */}
       <div className="md:hidden">
-        <div className="mb-3 grid grid-cols-5 gap-2" role="tablist" aria-label="요일 선택">
+        <div data-coach="days" className="mb-3 grid grid-cols-5 gap-2" role="tablist" aria-label="요일 선택">
           {days.map((d, i) => {
             const key = ymd(d)
             const count = byDate[key]?.length || 0
@@ -142,7 +143,7 @@ export default function WeekView({ anchor, setAnchor, reservations, invMap, onNe
       </div>
 
       {/* 태블릿·PC: 주간 표 */}
-      <div className="hidden rounded-[28px] bg-white p-3 soft-shadow md:block">
+      <div data-coach="days" className="hidden rounded-[28px] bg-white p-3 soft-shadow md:block">
         <div className="grid grid-cols-[3.25rem_repeat(5,1fr)]">
           <div />
           {days.map((d, i) => {

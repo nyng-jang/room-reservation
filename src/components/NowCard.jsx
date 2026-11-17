@@ -29,7 +29,7 @@ export default function NowCard({ todays, invMap, now, onBook, onOpen }) {
   }
 
   return (
-    <section className="anim-rise rounded-[28px] bg-white p-5 soft-shadow" aria-live="polite">
+    <section data-coach="now" className="anim-rise rounded-[28px] bg-white p-5 soft-shadow" aria-live="polite">
       <div className="flex items-center gap-4">
         <ProgressRing value={booked} max={CLOSE - OPEN}>
           <div className="text-center leading-tight">

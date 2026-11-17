@@ -12,6 +12,41 @@ import Segmented from './ui/Segmented'
 import Toast from './ui/Toast'
 import Menu from './ui/Menu'
 import Icon from './ui/Icon'
+import CoachMarks from './ui/CoachMarks'
+
+const COACH_KEY = 'rr_coach_done_v1'
+const COACH_STEPS = [
+  {
+    target: 'now',
+    title: '지금 조사실 상태',
+    body: '들어오자마자 지금 쓸 수 있는지 알려줘요. 빨간 점은 사용 중, 파란 점은 비어 있다는 뜻이에요.',
+  },
+  {
+    target: 'days',
+    title: '날짜 고르기',
+    body: '날짜를 누르면 그날 시간표가 나와요. 숫자 아래에는 예약 건수가 보여요.',
+  },
+  {
+    target: 'slot',
+    title: '빈 칸을 누르면 바로 예약',
+    body: '"비어 있음" 칸을 누르면 그 시간으로 예약 창이 열려요. 이미 있는 예약을 누르면 변경하거나 취소할 수 있어요.',
+  },
+  {
+    target: 'fab',
+    title: '어디서든 예약하기',
+    body: '이 버튼으로도 예약을 시작할 수 있어요. 이미 찬 시간은 고를 수 없게 막혀 있어서 겹칠 걱정이 없어요.',
+  },
+  {
+    target: 'tabs',
+    title: '월간 달력과 조사관 관리',
+    body: '한 달 일정은 월간에서, 조사관 추가·이름 변경·삭제는 조사관에서 할 수 있어요.',
+  },
+  {
+    target: 'menu',
+    title: '사용법 다시 보기',
+    body: '이 안내는 언제든 ⋯ 메뉴에서 다시 볼 수 있어요.',
+  },
+]
 
 function rangeFor(anchor) {
   const first = new Date(anchor.getFullYear(), anchor.getMonth(), 1)
@@ -40,6 +75,13 @@ export default function App() {
   const [live, setLive] = useState('connecting')
   const [sheet, setSheet] = useState(null)
   const [toast, setToast] = useState(null)
+  const [coach, setCoach] = useState(() => {
+    try {
+      return !localStorage.getItem(COACH_KEY)
+    } catch {
+      return false
+    }
+  })
   const toastTimer = useRef(null)
 
   const [from, to] = useMemo(() => rangeFor(anchor), [anchor])
@@ -167,7 +209,11 @@ export default function App() {
       />
     )
 
-  const liveDot = { live: ['bg-go', '실시간 반영 중'], connecting: ['bg-amber-400', '연결 중'], off: ['bg-faint', '실시간 꺼짐'] }[live]
+  const liveDot = {
+    live: ['bg-go', '실시간 반영 중'],
+    connecting: ['bg-amber-400', '연결 중'],
+    off: ['bg-faint', '실시간 꺼짐'],
+  }[live]
   const fabDate = ymd(anchor) < today ? nearestWeekday(now) : anchor
 
   return (
@@ -183,15 +229,35 @@ export default function App() {
             </span>
           </div>
         </div>
-        <Menu
-          items={[
-            { label: '데모 데이터 초기화', icon: 'refresh', confirm: '지금 데이터를 지우고 처음 상태로 돌릴까요?', run: handleReset },
-            { label: '나가기', icon: 'logout', run: () => (api.logout(), setAuthed(false)) },
-          ]}
-        />
+        <div data-coach="menu">
+          <Menu
+            items={[
+              {
+                label: '사용법 다시 보기',
+                icon: 'help',
+                run: () => {
+                  setSheet(null)
+                  setTab('week')
+                  setCoach(true)
+                },
+              },
+              {
+                label: '데모 데이터 초기화',
+                icon: 'refresh',
+                confirm: '지금 데이터를 지우고 처음 상태로 돌릴까요?',
+                run: handleReset,
+              },
+              {
+                label: '나가기',
+                icon: 'logout',
+                run: () => (api.logout(), setAuthed(false)),
+              },
+            ]}
+          />
+        </div>
       </header>
 
-      <div className="mb-4">
+      <div className="mb-4" data-coach="tabs">
         <Segmented
           label="보기 선택"
           value={tab}
@@ -211,14 +277,28 @@ export default function App() {
         </div>
       ) : (
         <div className="space-y-4">
-          {tab !== 'people' && (
-            <NowCard todays={todays} invMap={invMap} now={now} onBook={(h) => openNew(today, h)} onOpen={openEdit} />
-          )}
+          {tab !== 'people' && <NowCard todays={todays} invMap={invMap} now={now} onBook={(h) => openNew(today, h)} onOpen={openEdit} />}
           {tab === 'week' && (
-            <WeekView anchor={anchor} setAnchor={setAnchor} reservations={reservations} invMap={invMap} onNew={openNew} onEdit={openEdit} now={now} />
+            <WeekView
+              anchor={anchor}
+              setAnchor={setAnchor}
+              reservations={reservations}
+              invMap={invMap}
+              onNew={openNew}
+              onEdit={openEdit}
+              now={now}
+            />
           )}
           {tab === 'month' && (
-            <MonthView anchor={anchor} setAnchor={setAnchor} reservations={reservations} invMap={invMap} onNew={openNew} onEdit={openEdit} now={now} />
+            <MonthView
+              anchor={anchor}
+              setAnchor={setAnchor}
+              reservations={reservations}
+              invMap={invMap}
+              onNew={openNew}
+              onEdit={openEdit}
+              now={now}
+            />
           )}
           {tab === 'people' && <Investigators investigators={active} invMap={invMap} counts={monthCounts} reload={load} notify={notify} />}
         </div>
@@ -226,6 +306,7 @@ export default function App() {
 
       {tab !== 'people' && !loading && !sheet && (
         <button
+          data-coach="fab"
           onClick={() => openNew(ymd(fabDate), null)}
           className="fixed right-5 bottom-[max(24px,env(safe-area-inset-bottom))] z-20 flex min-h-14 items-center gap-2 rounded-full bg-go pr-6 pl-5 text-base font-semibold text-white shadow-xl active:opacity-85"
         >
@@ -242,6 +323,20 @@ export default function App() {
           onClose={() => setSheet(null)}
           onSave={handleSave}
           onDelete={handleDelete}
+        />
+      )}
+
+      {coach && !loading && tab === 'week' && (
+        <CoachMarks
+          steps={COACH_STEPS}
+          onDone={() => {
+            setCoach(false)
+            try {
+              localStorage.setItem(COACH_KEY, '1')
+            } catch {
+              /* 무시 */
+            }
+          }}
         />
       )}
 
