@@ -57,7 +57,7 @@ export default function NowCard({ todays, invMap, now, onBook, onOpen }) {
       {state.tone === 'free' && !beforeHours && (
         <button
           onClick={() => onBook(h)}
-          className="mt-4 flex min-h-12 w-full items-center justify-center gap-1.5 rounded-full bg-ink text-[15px] font-semibold text-white active:opacity-85"
+          className="mt-4 flex min-h-12 w-full items-center justify-center gap-1.5 rounded-full bg-go text-[15px] font-semibold text-white active:opacity-85"
         >
           <Icon name="plus" size={18} /> 지금 바로 예약하기
         </button>

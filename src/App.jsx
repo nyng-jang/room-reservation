@@ -227,7 +227,7 @@ export default function App() {
       {tab !== 'people' && !loading && !sheet && (
         <button
           onClick={() => openNew(ymd(fabDate), null)}
-          className="fixed right-5 bottom-[max(24px,env(safe-area-inset-bottom))] z-20 flex min-h-14 items-center gap-2 rounded-full bg-ink pr-6 pl-5 text-base font-semibold text-white shadow-xl active:opacity-85"
+          className="fixed right-5 bottom-[max(24px,env(safe-area-inset-bottom))] z-20 flex min-h-14 items-center gap-2 rounded-full bg-go pr-6 pl-5 text-base font-semibold text-white shadow-xl active:opacity-85"
         >
           <Icon name="plus" size={20} /> 예약하기
         </button>

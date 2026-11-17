@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
-/* 디자인 토큰: 화면 전체가 이 값만 쓰도록 통일 */
+/* 디자인 토큰: 화면 전체가 이 값만 쓰도록 통일 (색상은 중앙전파관리소 MI 기준) */
 @theme {
   --font-sans: "Pretendard Variable", Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --color-paper: #f7f7f5;   /* 배경 */
-  --color-mist: #efefec;    /* 보조 면 */
-  --color-line: #e4e4e0;    /* 구분선 */
-  --color-ink: #18181b;     /* 본문·주요 버튼 */
-  --color-sub: #6b6b66;     /* 보조 글자 */
-  --color-faint: #a3a39e;   /* 비활성 글자 */
-  --color-go: #22c55e;      /* 강조(초록) */
-  --color-go-soft: #dcfce7;
-  --color-warn: #dc2626;
+  /* 중앙전파관리소 MI 전용색상 기반 */
+  --color-go: #003668;      /* GOK Blue: 주요 버튼·선택·강조 */
+  --color-go-soft: #e8eef6; /* GOK Blue 옅은 면 */
+  --color-warn: #e6002d;    /* GOK Red: 사용 중·현재 시각·오류 */
+  --color-sub: #595757;     /* GOK Gray: 보조 글자 */
+  --color-ink: #1d1d1d;     /* 본문 */
+  --color-paper: #f5f7fa;   /* 배경 */
+  --color-mist: #edf1f5;    /* 보조 면 */
+  --color-line: #dde2e8;    /* 구분선 */
+  --color-faint: #9a9a9a;   /* 비활성 글자 */
 }
 
 html, body, #root { min-height: 100%; }
@@ -23,11 +24,11 @@ body {
   word-break: keep-all;
 }
 
-.go-grad { background: linear-gradient(135deg, #a3e635 0%, #22c55e 100%); }
+.go-grad { background: #003668; color: #fff; }
 .soft-shadow { box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 20px rgb(0 0 0 / 0.06); }
 
 button:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 3px solid #86efac;
+  outline: 3px solid #246beb;
   outline-offset: 2px;
 }
 

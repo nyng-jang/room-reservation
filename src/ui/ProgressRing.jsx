@@ -6,19 +6,13 @@ export default function ProgressRing({ value, max, size = 64, stroke = 7, childr
   return (
     <div className="relative shrink-0" style={{ width: size, height: size }}>
       <svg width={size} height={size} className="-rotate-90" aria-hidden="true">
-        <defs>
-          <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#a3e635" />
-            <stop offset="100%" stopColor="#22c55e" />
-          </linearGradient>
-        </defs>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#efefec" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#edf1f5" strokeWidth={stroke} />
         <circle
           cx={size / 2}
           cy={size / 2}
           r={r}
           fill="none"
-          stroke="url(#ring-grad)"
+          stroke="#003668"
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={c}

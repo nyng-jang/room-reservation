@@ -53,7 +53,7 @@ function Row({ inv, count, reload, notify }) {
             className="min-h-11 min-w-0 flex-1 rounded-2xl bg-paper px-3 text-[15px] ring-1 ring-line focus:ring-2 focus:ring-go focus:outline-none"
             aria-label="새 이름"
           />
-          <button onClick={save} className="min-h-11 rounded-full bg-ink px-4 text-sm font-semibold text-white">
+          <button onClick={save} className="min-h-11 rounded-full bg-go px-4 text-sm font-semibold text-white">
             저장
           </button>
         </>
@@ -122,7 +122,7 @@ export default function Investigators({ investigators, invMap, counts, reload, n
           />
           <button
             disabled={!name.trim()}
-            className="flex min-h-12 items-center gap-1 rounded-full bg-ink px-5 text-[15px] font-semibold text-white disabled:bg-line disabled:text-faint"
+            className="flex min-h-12 items-center gap-1 rounded-full bg-go px-5 text-[15px] font-semibold text-white disabled:bg-line disabled:text-faint"
           >
             <Icon name="plus" size={16} /> 추가
           </button>

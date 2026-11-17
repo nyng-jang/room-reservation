@@ -152,7 +152,7 @@ export default function ReservationSheet({ initial, investigators, invMap, now, 
             <button
               onClick={submit}
               disabled={busy || start == null || !invId}
-              className="min-h-13 flex-1 rounded-full bg-ink px-4 text-[15px] font-semibold text-white active:opacity-85 disabled:bg-line disabled:text-faint"
+              className="min-h-13 flex-1 rounded-full bg-go px-4 text-[15px] font-semibold text-white active:opacity-85 disabled:bg-line disabled:text-faint"
             >
               {busy ? '저장 중…' : summary ? `${summary} ${isEdit ? '로 변경' : '예약'}` : '시작 시간을 골라 주세요'}
             </button>

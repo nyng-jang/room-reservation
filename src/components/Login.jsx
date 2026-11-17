@@ -61,7 +61,7 @@ export default function Login({ onDone }) {
         )}
         <button
           disabled={busy || !code.trim()}
-          className="mt-3 min-h-13 w-full rounded-full bg-ink text-base font-semibold text-white active:opacity-85 disabled:bg-line disabled:text-faint"
+          className="mt-3 min-h-13 w-full rounded-full bg-go text-base font-semibold text-white active:opacity-85 disabled:bg-line disabled:text-faint"
         >
           {busy ? '확인 중…' : '들어가기'}
         </button>

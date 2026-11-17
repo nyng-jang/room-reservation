@@ -5,8 +5,8 @@ export default function Toast({ toast, onAction }) {
   if (!toast) return null
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-24 z-50 flex justify-center px-4" role="status" aria-live="polite">
-      <div key={toast.id} className="anim-rise pointer-events-auto flex max-w-md items-center gap-2.5 rounded-full bg-ink py-2 pr-2 pl-2.5 text-white shadow-xl">
-        <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${toast.error ? 'bg-warn' : 'go-grad text-ink'}`}>
+      <div key={toast.id} className="anim-rise pointer-events-auto flex max-w-md items-center gap-2.5 rounded-full bg-go py-2 pr-2 pl-2.5 text-white shadow-xl">
+        <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${toast.error ? 'bg-warn' : 'bg-white text-go'}`}>
           <Icon name={toast.error ? 'alert' : 'check'} size={16} stroke={2.6} />
         </span>
         <span className="pr-2 text-[15px] font-medium">{toast.msg}</span>

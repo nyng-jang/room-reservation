@@ -117,7 +117,7 @@ export default function WeekView({ anchor, setAnchor, reservations, invMap, onNe
                 <span className={`text-xs ${isToday ? 'font-bold text-go' : 'text-sub'}`}>{isToday ? '오늘' : DAY_NAMES[i]}</span>
                 <span
                   className={`mt-1 flex h-10 w-10 items-center justify-center rounded-full text-lg font-bold ${
-                    on ? 'go-grad text-ink' : isToday ? 'bg-mist' : ''
+                    on ? 'go-grad' : isToday ? 'bg-mist' : ''
                   }`}
                 >
                   {d.getDate()}
