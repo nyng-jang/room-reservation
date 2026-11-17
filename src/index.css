@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* 디자인 토큰: 화면 전체가 이 값만 쓰도록 통일 */
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --color-paper: #f7f7f5;   /* 배경 */
+  --color-mist: #efefec;    /* 보조 면 */
+  --color-line: #e4e4e0;    /* 구분선 */
+  --color-ink: #18181b;     /* 본문·주요 버튼 */
+  --color-sub: #6b6b66;     /* 보조 글자 */
+  --color-faint: #a3a39e;   /* 비활성 글자 */
+  --color-go: #22c55e;      /* 강조(초록) */
+  --color-go-soft: #dcfce7;
+  --color-warn: #dc2626;
+}
+
+html, body, #root { min-height: 100%; }
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+  font-feature-settings: "tnum";
+  word-break: keep-all;
+}
+
+.go-grad { background: linear-gradient(135deg, #a3e635 0%, #22c55e 100%); }
+.soft-shadow { box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 20px rgb(0 0 0 / 0.06); }
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #86efac;
+  outline-offset: 2px;
+}
+
+@keyframes rise { from { transform: translateY(16px); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes sheet { from { transform: translateY(100%) } to { transform: none } }
+@keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+.anim-rise { animation: rise .22s ease-out both; }
+.anim-sheet { animation: sheet .26s cubic-bezier(.2,.8,.2,1) both; }
+.anim-fade { animation: fade .2s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise, .anim-sheet, .anim-fade { animation: none; }
+}
